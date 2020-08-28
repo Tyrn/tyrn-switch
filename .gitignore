@@ -1,0 +1,10 @@
+# poetry
+/dist/
+__pycache__/
+*.egg-info/
+poetry.lock
+
+# IDE
+*.vim
+*.geany
+.idea
