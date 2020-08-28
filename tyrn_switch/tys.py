@@ -26,10 +26,18 @@ def list_links():
 
 
 def remove_links():
-    print("To be removed:")
+    print("To be removed: ***********")
     list_links()
     os.system(f"rm {CONF}/nvim")
     os.system(f"rm {LSHARE}/nvim")
+    print("**************************\n")
+
+
+def create_links_to_nvim(target):
+    remove_links()
+    os.system(f"ln -s {TARGET}/{target} {CONF}/nvim")
+    os.system(f"ln -s {LSHARE}/{target} {LSHARE}/nvim")
+    list_links()
 
 
 def options():
@@ -41,15 +49,9 @@ def options():
     elif AG.remove_links:
         remove_links()
     elif AG.nvim_fisa:
-        os.system(f"ln -s {TARGET}/nvim-fisa {CONF}/nvim")
-        os.system(f"ln -s {LSHARE}/nvim-fisa {LSHARE}/nvim")
-        list_links()
+        create_links_to_nvim("nvim-fisa")
     elif AG.nvim_gq:
-        os.system(f"ln -s {TARGET}/nvim-gq {CONF}/nvim")
-        os.system(f"ln -s {LSHARE}/nvim-gq {LSHARE}/nvim")
-        list_links()
-
-    print(f"options(): {AG}")
+        create_links_to_nvim("nvim-gq")
 
 
 def retrieve_args():
