@@ -12,7 +12,24 @@ import warnings
 from pathlib import Path
 
 
+LSHARE = "~/.local/share"
+CONF = "~/.config"
+TARGET = f"{CONF}/arch-chronicle"
+
+
 AG = None
+
+
+def list_links():
+    os.system(f"ls -l {CONF}/nvim")
+    os.system(f"ls -l {LSHARE}/nvim")
+
+
+def remove_links():
+    print("To be removed:")
+    list_links()
+    os.system(f"rm {CONF}/nvim")
+    os.system(f"rm {LSHARE}/nvim")
 
 
 def options():
@@ -20,11 +37,17 @@ def options():
     Processes selected options.
     """
     if AG.list_options:
-        print("ls option not implemented.")
+        list_links()
+    elif AG.remove_links:
+        remove_links()
     elif AG.nvim_fisa:
-        print("fa option not implemented.")
+        os.system(f"ln -s {TARGET}/nvim-fisa {CONF}/nvim")
+        os.system(f"ln -s {LSHARE}/nvim-fisa {LSHARE}/nvim")
+        list_links()
     elif AG.nvim_gq:
-        print("gq option not implemented.")
+        os.system(f"ln -s {TARGET}/nvim-gq {CONF}/nvim")
+        os.system(f"ln -s {LSHARE}/nvim-gq {LSHARE}/nvim")
+        list_links()
 
     print(f"options(): {AG}")
 
@@ -55,6 +78,12 @@ Inhouse options: switching bits and pieces.
         "-ls",
         "--list-options",
         help="list all the options as selected",
+        action="store_true",
+    )
+    parser.add_argument(
+        "-rl",
+        "--remove-links",
+        help="remove option defining soft links",
         action="store_true",
     )
     return parser.parse_args()
