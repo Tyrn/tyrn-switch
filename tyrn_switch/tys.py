@@ -65,16 +65,10 @@ Inhouse options: switching bits and pieces.
     )
 
     parser.add_argument(
-        "-fa",
-        "--nvim-fisa",
-        help="select fisa neovim config",
-        action="store_true",
+        "-fa", "--nvim-fisa", help="select fisa neovim config", action="store_true",
     )
     parser.add_argument(
-        "-gq",
-        "--nvim-gq",
-        help="select gq neovim config",
-        action="store_true",
+        "-gq", "--nvim-gq", help="select gq neovim config", action="store_true",
     )
     parser.add_argument(
         "-ls",
